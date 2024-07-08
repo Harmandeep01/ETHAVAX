@@ -75,7 +75,7 @@ To compile and deploy this contract, follow these steps:
    ```
 3. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/simple-token.git
+   git clone https://github.com/Harmandeep01/ETHAVAX/tree/main/ETH%2BAVAX/Module1/functionAndErrors
    cd simple-token
    ```
 4. Install the dependencies:
