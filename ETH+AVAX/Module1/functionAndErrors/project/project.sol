@@ -2,8 +2,8 @@
 pragma solidity ^0.8.0;
 
 contract SimpleToken {
-    string public name = "SimpleToken";
-    string public symbol = "STK";
+    string public name = "Hermann";
+    string public symbol = "HTK";
     uint8 public decimals = 18;
     uint256 public totalSupply;
     mapping(address => uint256) public balanceOf;

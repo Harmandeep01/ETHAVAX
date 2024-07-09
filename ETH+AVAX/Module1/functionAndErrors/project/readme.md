@@ -1,5 +1,5 @@
 
-# SimpleToken Smart Contract
+# HermannToken Smart Contract
 
 This is a simple Ethereum smart contract written in Solidity. It demonstrates the use of `require()`, `assert()`, and `revert()` statements. The contract implements a basic token with functionalities such as transferring tokens, minting new tokens, and burning existing tokens.
 
