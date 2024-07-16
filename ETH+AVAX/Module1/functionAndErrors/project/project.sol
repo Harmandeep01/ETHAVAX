@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 contract SimpleToken {
     string public name = "Hermann";
     string public symbol = "HTK";
-    uint8 public decimals = 18;
     uint256 public totalSupply;
     mapping(address => uint256) public balanceOf;
 
@@ -14,7 +13,7 @@ contract SimpleToken {
 
     constructor(uint256 _initialSupply) {
         owner = msg.sender;
-        totalSupply = _initialSupply * (10 ** uint256(decimals));
+        totalSupply = _initialSupply;
         balanceOf[msg.sender] = totalSupply;
     }
 
@@ -36,18 +35,18 @@ contract SimpleToken {
     function mint(uint256 _amount) public onlyOwner {
         require(_amount > 0, "Mint amount should be greater than zero");
 
-        totalSupply += _amount * (10 ** uint256(decimals));
-        balanceOf[owner] += _amount * (10 ** uint256(decimals));
-        emit Transfer(address(0), owner, _amount * (10 ** uint256(decimals)));
+        totalSupply += _amount;
+        balanceOf[owner] += _amount;
+        emit Transfer(address(0), owner, _amount);
     }
 
     function burn(uint256 _amount) public {
         require(_amount > 0, "Burn amount should be greater than zero");
         require(balanceOf[msg.sender] >= _amount, "Insufficient balance to burn");
 
-        balanceOf[msg.sender] -= _amount * (10 ** uint256(decimals));
-        totalSupply -= _amount * (10 ** uint256(decimals));
-        emit Transfer(msg.sender, address(0), _amount * (10 ** uint256(decimals)));
+        balanceOf[msg.sender] -= _amount ;
+        totalSupply -= _amount ;
+        emit Transfer(msg.sender, address(0), _amount);
     }
 
     function emergencyWithdraw() public onlyOwner {
