@@ -1,84 +1,79 @@
 
-# Restaurant Loyalty Program Smart Contract
+# GCD (Greatest Common Divisor) Contract
 
-This smart contract implements a basic loyalty program for a restaurant, allowing customers to earn and redeem tokens (HRT).
+This Solidity contract provides a function to calculate the Greatest Common Divisor (GCD) of two non-negative integers using the Euclidean algorithm. The contract includes input validation and internal checks to ensure correct operation.
 
-## Contract Details
+## Contract Overview
 
-- **Name**: Hermann Restaurant Loyalty Program
-- **Symbol**: HRT
-- **Total Supply**: Defined at deployment
-- **Owner**: The account that deploys the contract
+The `GCD` contract contains a single function, `gcd`, which calculates the GCD of two unsigned integers. The function employs the Euclidean algorithm and includes error handling to validate inputs and ensure the correctness of the results.
 
-## Functionality
+## Functions
 
-### State Variables
+### `gcd(uint a, uint b) -> uint`
 
-- `string public name`: Name of the loyalty program.
-- `string public symbol`: Symbol for the tokens.
-- `uint256 public totalSupply`: Total supply of tokens.
-- `address public owner`: Address of the contract owner.
-- `mapping(address => uint256) public balanceOf`: Mapping to keep track of balances.
+This function calculates the GCD of two unsigned integers, `a` and `b`.
 
-### Events
+#### Parameters:
 
-- `event Transfer(address indexed from, address indexed to, uint256 value)`: Emitted when tokens are transferred.
-- `event RewardRedeemed(address indexed customer, string reward, uint256 cost)`: Emitted when a reward is redeemed.
+- `a` (uint): A positive integer greater than 0.
+- `b` (uint): A non-negative integer (can be 0).
 
-### Modifiers
+#### Returns:
 
-- `modifier onlyOwner()`: Restricts access to the contract owner.
+- (uint): The GCD of `a` and `b`.
 
-### Functions
+#### Error Handling:
 
-#### Constructor
+- `require(a > 0, "Input a must be greater than 0");`
+  - Ensures that `a` is a positive integer greater than 0.
+- `require(b >= 0, "Input b must be non-negative");`
+  - Ensures that `b` is a non-negative integer.
+- `assert(result > 0);`
+  - Ensures that the result is always greater than 0, which should be true in a correct implementation.
 
-```solidity
-constructor(uint256 _initialSupply)
-```
-Initializes the contract, setting the initial supply and assigning all tokens to the owner.
-
-#### Transfer
+#### Example Usage:
 
 ```solidity
-function transfer(address _to, uint256 _value) public returns (bool success)
+uint result = gcd(48, 18); // result will be 6
 ```
-Transfers `_value` tokens from the caller to `_to`.
-
-#### Issue Tokens
-
-```solidity
-function issueTokens(address _to, uint256 _value) public onlyOwner returns (bool success)
-```
-Issues `_value` new tokens to `_to`. Only the owner can call this function.
-
-#### Redeem Reward
-
-```solidity
-function redeemReward(address _customer, string memory _reward, uint256 _cost) public onlyOwner returns (bool success)
-```
-Redeems `_cost` tokens from `_customer` for a specified `_reward`. Only the owner can call this function.
-
-## Deployment
-
-To deploy this contract, you will need:
-
-1. An Ethereum wallet with sufficient funds for gas fees.
-2. A tool like Remix, Truffle, or Hardhat to deploy the contract.
-
-### Example Deployment with Remix
-
-1. Open [Remix IDE](https://remix.ethereum.org/).
-2. Create a new file and paste the smart contract code.
-3. Compile the contract.
-4. Deploy the contract, specifying the initial token supply.
 
 ## Usage
 
-1. **Transfer Tokens**: Call the `transfer` function with the recipient address and amount.
-2. **Issue Tokens**: As the owner, call the `issueTokens` function with the recipient address and amount.
-3. **Redeem Rewards**: As the owner, call the `redeemReward` function with the customer address, reward description, and token cost.
+To use the `GCD` contract, deploy it to the Ethereum blockchain using your preferred method (e.g., Remix, Truffle, Hardhat). After deployment, you can call the `gcd` function with the desired inputs to calculate the GCD.
+
+### Example Deployment and Function Call
+
+1. **Deploy the Contract**:
+   - Use Remix or another Ethereum development environment to deploy the `GCD` contract.
+
+2. **Call the `gcd` Function**:
+   - After deployment, call the `gcd` function with two integers to get the GCD.
+
+### Example:
+
+```solidity
+GCD gcdContract = new GCD();
+uint result = gcdContract.gcd(48, 18); // result will be 6
+```
+
+## Development
+
+To contribute to this project, clone the repository and make changes as needed. Ensure that you test the contract thoroughly, especially focusing on edge cases and input validation.
+
+### Prerequisites:
+
+- Solidity compiler version ^0.8.9
+
+### Compile and Deploy:
+
+1. Compile the contract using a Solidity compiler.
+2. Deploy the contract to a local or test Ethereum network.
+3. Interact with the contract using a tool like Remix, Truffle, or Hardhat.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+**Note**: This contract is designed for educational purposes. Ensure you understand the code and test thoroughly before deploying to a production environment.
