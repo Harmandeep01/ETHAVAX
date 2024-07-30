@@ -87,8 +87,7 @@ This will set the `Grade` variable to "B" and emit the remark "Well done, Keep i
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-```
-@Harmandeep01
-@Metacrafters
+Created by [@Harmandeep01](https://github.com/Harmandeep01/) with the help of [@Metacrafters](https://academy.metacrafters.io/)
 
-```
+Reachout by [email](sharmandeep954@gmail.com) OR [LinkedIn](https://www.linkedin.com/in/harmandeep-87032918b/)
+
