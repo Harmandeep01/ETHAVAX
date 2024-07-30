@@ -1,18 +1,38 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract GCD {
+contract Grades {
 
-    function gcd(uint a, uint b) public pure returns (uint) {
-        require(a > 0, "Input a must be greater than 0");
-        require(b >= 0, "Input b must be non-negative");
+    event remarks(string log);
 
-        if (b == 0) {
-            return a;
-        } else {
-            uint result = gcd(b, a % b);
-            assert(result > 0);
-            return result;
+    string public Grade = "No Grades yet!";
+
+    function gradeCalculate(uint256 totalMarks) public returns(string memory){
+        require(totalMarks > 0 && totalMarks <=100, "Please enter the marks between 1-100");
+        if(totalMarks <=32){
+            Grade = "fail! Beter Luck";
+            return Grade;
+        } 
+       else if(totalMarks >=33  && totalMarks <=55) {
+            Grade = "D";
+            emit remarks("Need serious improvement");
+            return Grade;
+        } 
+        else if(totalMarks >=56 && totalMarks <=75) {
+            Grade = "C";
+            emit remarks("Good, but need practice");
+            return Grade;
         }
-    }
+        else if(totalMarks >= 76 && totalMarks<=89){
+            Grade = "B";
+            emit remarks("Well done ,Keep it up");
+            return Grade;
+        }
+        else {
+            Grade = "A";
+            emit remarks("Excellent, Keep Shining!!");
+            return Grade;
+        }
+
+    } 
 }

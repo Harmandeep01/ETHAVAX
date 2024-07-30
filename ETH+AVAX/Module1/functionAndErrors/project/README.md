@@ -1,79 +1,94 @@
+# Grades Smart Contract
 
-# GCD (Greatest Common Divisor) Contract
+## Overview
 
-This Solidity contract provides a function to calculate the Greatest Common Divisor (GCD) of two non-negative integers using the Euclidean algorithm. The contract includes input validation and internal checks to ensure correct operation.
+The `Grades` smart contract is designed to calculate and store grades based on the total marks provided. It assigns grades and emits remarks based on predefined conditions. The contract is written in Solidity and is compatible with Solidity version ^0.8.9.
 
-## Contract Overview
+## Features
 
-The `GCD` contract contains a single function, `gcd`, which calculates the GCD of two unsigned integers. The function employs the Euclidean algorithm and includes error handling to validate inputs and ensure the correctness of the results.
+- Calculates grades based on the total marks provided (between 1 and 100).
+- Stores the calculated grade.
+- Emits remarks for certain grade ranges to provide feedback.
 
-## Functions
+## Running the Contract
 
-### `gcd(uint a, uint b) -> uint`
+You can run and interact with this smart contract using Remix IDE, a powerful online tool for developing, deploying, and managing Ethereum-based smart contracts.
 
-This function calculates the GCD of two unsigned integers, `a` and `b`.
+### Steps to Run in Remix IDE
 
-#### Parameters:
+1. **Open Remix IDE**:
+   - Go to [Remix IDE](https://remix.ethereum.org/).
 
-- `a` (uint): A positive integer greater than 0.
-- `b` (uint): A non-negative integer (can be 0).
+2. **Create a New File**:
+   - In the file explorer pane, click on the `+` icon to create a new file.
+   - Name the file `Grades.sol`.
 
-#### Returns:
+3. **Copy the Contract Code**:
+   - Copy the Solidity code *from above file: Grades.sol* and paste it into [Remix IDE](https://remix.ethereum.org/)
 
-- (uint): The GCD of `a` and `b`.
+4. **Compile the Contract**:
+   - Select the `Solidity Compiler` from the left pane.
+   - Ensure the compiler version is set to `0.8.9`.
+   - Click on the `Compile Grades.sol` button.
 
-#### Error Handling:
+5. **Deploy the Contract**:
+   - Select the `Deploy & Run Transactions` option from the left pane.
+   - Choose `Injected Web3` as the environment if you want to use a web3 provider like MetaMask, or `JavaScript VM` for a local simulation.
+   - Click on the `Deploy` button.
 
-- `require(a > 0, "Input a must be greater than 0");`
-  - Ensures that `a` is a positive integer greater than 0.
-- `require(b >= 0, "Input b must be non-negative");`
-  - Ensures that `b` is a non-negative integer.
-- `assert(result > 0);`
-  - Ensures that the result is always greater than 0, which should be true in a correct implementation.
+6. **Interact with the Contract**:
+   - After deployment, you can interact with the contract functions from the deployed contract section in Remix.
+   - Use the `gradeCalculate` function to calculate grades by providing total marks as input.
 
-#### Example Usage:
+## Contract Details
 
-```solidity
-uint result = gcd(48, 18); // result will be 6
-```
-
-## Usage
-
-To use the `GCD` contract, deploy it to the Ethereum blockchain using your preferred method (e.g., Remix, Truffle, Hardhat). After deployment, you can call the `gcd` function with the desired inputs to calculate the GCD.
-
-### Example Deployment and Function Call
-
-1. **Deploy the Contract**:
-   - Use Remix or another Ethereum development environment to deploy the `GCD` contract.
-
-2. **Call the `gcd` Function**:
-   - After deployment, call the `gcd` function with two integers to get the GCD.
-
-### Example:
+### Solidity Version
 
 ```solidity
-GCD gcdContract = new GCD();
-uint result = gcdContract.gcd(48, 18); // result will be 6
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.9;
 ```
 
-## Development
+### Contract: Grades
 
-To contribute to this project, clone the repository and make changes as needed. Ensure that you test the contract thoroughly, especially focusing on edge cases and input validation.
+#### Events
 
-### Prerequisites:
+- `remarks(string log)`: Emitted when certain grade conditions are met, providing feedback.
 
-- Solidity compiler version ^0.8.9
+#### State Variables
 
-### Compile and Deploy:
+- `string public Grade`: Stores the calculated grade. Initially set to "No Grades yet!".
 
-1. Compile the contract using a Solidity compiler.
-2. Deploy the contract to a local or test Ethereum network.
-3. Interact with the contract using a tool like Remix, Truffle, or Hardhat.
+#### Functions
+
+- `function gradeCalculate(uint256 totalMarks) public returns (string memory)`: 
+  - Calculates the grade based on the total marks provided.
+  - Validates that the total marks are between 1 and 100.
+  - Assigns and returns a grade based on the following conditions:
+    - `<= 32`: "fail! Better Luck"
+    - `33 - 55`: "D"
+    - `56 - 75`: "C"
+    - `76 - 89`: "B"
+    - `>= 90`: "A"
+  - Emits a remark for grades "D", "C", "B", and "A".
+
+## Example
+
+To calculate a grade, call the `gradeCalculate` function with the total marks as an argument. For example:
+
+```solidity
+Grades grades = new Grades();
+string memory grade = grades.gradeCalculate(85);
+```
+
+This will set the `Grade` variable to "B" and emit the remark "Well done, Keep it up".
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
----
+```
+@Harmandeep01
+@Metacrafters
 
-**Note**: This contract is designed for educational purposes. Ensure you understand the code and test thoroughly before deploying to a production environment.
+```
