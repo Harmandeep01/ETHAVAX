@@ -1,107 +1,80 @@
 
-# MyToken Smart Contract
+# MyToken (HDP)
 
-This repository contains the source code for the `MyToken` smart contract written in Solidity. This contract allows the owner to mint and burn tokens, and allows token transfers between addresses.
+`MyToken` is an ERC-20 token contract named "Hermann" with the symbol "HDP." The contract allows the owner to mint new tokens, and any user can burn and transfer their tokens. It also supports ERC-20 standard token transfers and includes additional features such as permit-based approvals.
+
+## Features
+
+- **ERC-20 Standard:** Implements the standard ERC-20 interface.
+- **Minting:** Only the contract owner can mint new tokens.
+- **Burning:** Any user can burn their own tokens.
+- **Permit:** Supports off-chain approvals via ERC-2612 permits.
 
 ## Contract Details
 
-- **Token Name**: HermannCoin
-- **Token Symbol**: HNC
+- **Name:** Hermann
+- **Symbol:** HDP
+- **Decimals:** 18 (default for ERC-20)
+- **Total Supply:** Dynamically managed through minting and burning.
 
 ## Functions
 
-1. **mint(address _address, uint256 _value)**:
-   - Mints new tokens to the specified address.
-   - Only the contract owner can call this function.
+### `mint(address to, uint256 amount)`
 
-2. **burn(address _address, uint256 _value)**:
-   - Burns the specified amount of tokens from the specified address.
+- **Description:** Mints new tokens and assigns them to the specified address. This function can only be called by the contract owner.
+- **Parameters:**
+  - `to`: The address to which the minted tokens will be assigned.
+  - `amount`: The number of tokens to mint.
 
-3. **transfer(address _from, address _to, uint256 value)**:
-   - Transfers tokens from one address to another.
+### `burn(uint256 amount)`
 
-## Getting Started
+- **Description:** Burns a specified number of tokens from the caller's balance.
+- **Parameters:**
+  - `amount`: The number of tokens to burn.
 
-To deploy and interact with this smart contract, follow the steps below.
+### `transfer(address recipient, uint256 amount)`
 
-### Prerequisites
+- **Description:** Transfers tokens to a specified address. This function is inherited from the ERC-20 standard.
+- **Parameters:**
+  - `recipient`: The address to which the tokens will be sent.
+  - `amount`: The number of tokens to transfer.
 
-- [Node.js](https://nodejs.org/)
-- [npm](https://www.npmjs.com/)
-- [Truffle](https://www.trufflesuite.com/truffle)
-- [Ganache](https://www.trufflesuite.com/ganache)
-- [MetaMask](https://metamask.io/)
+## Usage
 
-### Installation
+### Deployment
 
-1. **Clone the repository**:
+To deploy the contract:
 
-    ```bash
-    git clone https://github.com/your-username/MyToken.git
-    cd MyToken
-    ```
+- Add the `initialOwner` address inside the field and HIT the deploy button.
 
-2. **Install Truffle**:
+``N O T E : `` *The address you enter for the initialOwner will be the owner of the deployed contract; you can change that later by using OpenZeppelin functions*.
 
-    ```bash
-    npm install -g truffle
-    ```
+`Enjoy! Your Contract is deployed`
 
-3. **Install dependencies**:
+### Minting Tokens
 
-    ```bash
-    npm install
-    ```
+Only the owner can mint tokens:
 
-### Compile the Contract
+- Select `mint` , add the address in `to` field and Value in `amount` field then `transact` .
 
-To compile the smart contract, run:
+### Transfer 
+- Add the address `to` which we want to transfer inside `to` field and value inside `value` field and hit `transact`
+### Burning Tokens
 
-```bash
-truffle compile
-```
+Any user can burn their tokens:
 
-### Deploy the Contract
+- Select the `Burn` function and add the Value. 
 
-1. **Start Ganache**:
-   
-   Open Ganache and create a new workspace or use the default workspace.
+## Author
 
-2. **Deploy the contract to the local blockchain**:
+- **Name**: Harmandeep
+- **Email**: [sharmandeep954@gmail.com](sharmandeep954@gmail.com)
+- **GitHub**: [https://github.com/Harmandeep01](https://github.com/Harmandeep01)
+- **LinkedIn**: [https://www.linkedin.com/in/harmandeep-87032918b/](https://www.linkedin.com/in/harmandeep-87032918b/)
 
-    ```bash
-    truffle migrate
-    ```
-
-### Interact with the Contract
-
-You can interact with the contract using Truffle console or through a frontend interface. To use Truffle console, run:
-
-```bash
-truffle console
-```
-
-Then you can call the contract functions, for example:
-
-```javascript
-// Get the deployed contract instance
-let instance = await MyToken.deployed()
-
-// Check the owner
-let owner = await instance.owner()
-console.log(owner)
-
-// Mint tokens (only owner can do this)
-await instance.mint(owner, 1000)
-
-// Check balance
-let balance = await instance.balances(owner)
-console.log(balance.toString())
-
-// Transfer tokens
-await instance.transfer(owner, '0xAddressHere', 500)
-```
+Feel free to reach out for any questions or collaborations!
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) file for details.
+

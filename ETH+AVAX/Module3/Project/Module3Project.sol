@@ -1,42 +1,24 @@
 // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.9;
 
-pragma solidity ^0.8.2;
 
-contract MyToken {
-    address public owner;
-    string public tokenName;
-    string public tokenSymbol;
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-    mapping(address => uint256) public balances;
+// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Only the contract owner can perform this action");
-        _;
+contract MyToken is ERC20,ERC20Burnable, Ownable, ERC20Permit {
+    constructor(address initialOwner)
+        ERC20("Hermann", "HDP")
+        Ownable(initialOwner)
+        ERC20Permit("Hermann")
+    {}
+
+    function mint(address to, uint256 amount) public onlyOwner {
+        require(msg.sender == owner(), "Only the owner can mint tokens");
+       _mint(to, amount);
     }
 
-    constructor() {
-        owner = msg.sender;
-        tokenName = "HermannCoin";
-        tokenSymbol = "HNC";
-    }
-
-   function mint(address _address, uint256 _value) public onlyOwner{
-        require(_address == owner, "uuh ooh! You are not the owner of this contract");
-        balances[_address] += _value;
-    }
-
-
-   function burn(address _address, uint256 _value) public {
-        if (balances[_address] >= _value) {
-            balances[_address] -= _value;
-        }
-    }
-
-   function transfer( address _from, address _to, uint256 value) public {
-        if (balances[_from] >= value) {
-
-            balances[_from] -= value;
-            balances[_to] += value;
-        }
-    }
 }
