@@ -1,69 +1,71 @@
 
-# MyToken (HDP)
+# MyToken - ERC20 Token with Custom Functions
 
-`MyToken` is an ERC-20 token contract named "Hermann" with the symbol "HDP." The contract allows the owner to mint new tokens, and any user can burn and transfer their tokens. It also supports ERC-20 standard token transfers and includes additional features such as permit-based approvals.
+## Overview
 
-## Features
-
-- **ERC-20 Standard:** Implements the standard ERC-20 interface.
-- **Minting:** Only the contract owner can mint new tokens.
-- **Burning:** Any user can burn their own tokens.
-- **Permit:** Supports off-chain approvals via ERC-2612 permits.
+**MyToken** is a custom ERC20 token based on the OpenZeppelin framework. It includes the following features:
+- Minting: The owner of the contract can mint new tokens.
+- Explicit Transfer: A custom function to transfer tokens between addresses.
+- Burning: Token holders can burn (destroy) their tokens, reducing the total supply.
 
 ## Contract Details
 
-- **Name:** Hermann
-- **Symbol:** HDP
-- **Decimals:** 18 (default for ERC-20)
-- **Total Supply:** Dynamically managed through minting and burning.
+- **Token Name**: Hermann
+- **Token Symbol**: HDP
+- **Standard**: ERC20
 
-## Functions
+## Features
 
-### `mint(address to, uint256 amount)`
+1. **Minting**
+   - The owner can mint new tokens to a specified address.
+   - The minting function ensures only the contract owner can mint tokens.
+   - The minted tokens are added to the recipient's balance.
 
-- **Description:** Mints new tokens and assigns them to the specified address. This function can only be called by the contract owner.
-- **Parameters:**
-  - `to`: The address to which the minted tokens will be assigned.
-  - `amount`: The number of tokens to mint.
+2. **Explicit Transfer**
+   - A custom transfer function that allows users to transfer tokens to another address.
+   - The function checks if the sender has sufficient balance before transferring.
+   - After the transfer, the function ensures that the balance has been correctly updated.
 
-### `burn(uint256 amount)`
+3. **Burning**
+   - A custom burn function that allows token holders to burn their tokens.
+   - The burned tokens are deducted from the sender's balance without being added to any other account.
+   - The function ensures that the balance has been correctly updated after burning.
 
-- **Description:** Burns a specified number of tokens from the caller's balance.
-- **Parameters:**
-  - `amount`: The number of tokens to burn.
 
-### `transfer(address recipient, uint256 amount)`
 
-- **Description:** Transfers tokens to a specified address. This function is inherited from the ERC-20 standard.
-- **Parameters:**
-  - `recipient`: The address to which the tokens will be sent.
-  - `amount`: The number of tokens to transfer.
+## Installation
+
+To use this contract in your project, include the following dependencies in your `hardhat` or `truffle` project:
+
+```bash
+npm install @openzeppelin/contracts
+```
 
 ## Usage
 
-### Deployment
+Deploy the contract and interact with the functions using the following guidelines:
 
-To deploy the contract:
+1. **Minting Tokens**
+   - Only the owner can call the `mint` function to create new tokens.
+   - Example:
+     ```solidity
+     MyToken.mint(0xRecipientAddress, 1000);
+     ```
 
-- Add the `initialOwner` address inside the field and HIT the deploy button.
+2. **Explicit Transfer**
+   - Any token holder can transfer their tokens using the `explicitTransfer` function.
+   - Example:
+     ```solidity
+     MyToken.explicitTransfer(0xRecipientAddress, 100);
+     ```
 
-``N O T E : `` *The address you enter for the initialOwner will be the owner of the deployed contract; you can change that later by using OpenZeppelin functions*.
+3. **Burning Tokens**
+   - Token holders can burn their tokens using the `burnTokens` function.
+   - Example:
+     ```solidity
+     MyToken.burnTokens(50);
+     ```
 
-`Enjoy! Your Contract is deployed`
-
-### Minting Tokens
-
-Only the owner can mint tokens:
-
-- Select `mint` , add the address in `to` field and Value in `amount` field then `transact` .
-
-### Transfer 
-- Add the address `to` which we want to transfer inside `to` field and value inside `value` field and hit `transact`
-### Burning Tokens
-
-Any user can burn their tokens:
-
-- Select the `Burn` function and add the Value. 
 
 ## Author
 
@@ -72,9 +74,6 @@ Any user can burn their tokens:
 - **GitHub**: [https://github.com/Harmandeep01](https://github.com/Harmandeep01)
 - **LinkedIn**: [https://www.linkedin.com/in/harmandeep-87032918b/](https://www.linkedin.com/in/harmandeep-87032918b/)
 
-Feel free to reach out for any questions or collaborations!
-
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) file for details.
-
+This project is licensed under the [MIT](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) License.
